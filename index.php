@@ -1,8 +1,13 @@
 <?php
-    if (isset($_COOKIE['user_login']) && $_COOKIE['user_login'] === 'true') {
-        echo "Bạn đã đăng nhập rồi.";
-    } else {
-        header("Location: page/login.php");
-        exit;
-    }
+session_start();
+
+// Kiểm tra xem người dùng đã login chưa
+if (!isset($_SESSION['user_id'])) {
+    // Chưa đăng nhập → chuyển về trang login
+    header("Location: /login.php");
+    exit();
+}
+
+// Nếu đã đăng nhập, lấy thông tin từ session
+$user_email = $_SESSION['email'];
 ?>
